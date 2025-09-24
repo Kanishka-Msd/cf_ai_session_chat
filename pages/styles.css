@@ -1,0 +1,11 @@
+body { font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; margin:0; }
+.container { max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+h1 { font-size: 1.5rem; }
+.log { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; min-height: 300px; display: flex; flex-direction: column; gap: .5rem; }
+.msg { padding: .5rem .75rem; border-radius: 8px; max-width: 80%; }
+.msg.you { align-self: flex-end; background: #eef6ff; }
+.msg.bot { align-self: flex-start; background: #f6f6f6; }
+.row { display: flex; gap: .5rem; margin-top: 1rem; }
+.row input { flex: 1; padding: .5rem .75rem; border: 1px solid #ddd; border-radius: 6px; }
+.row button { padding: .5rem .75rem; }
+.hint { color: #666; margin-top: .75rem; font-size: .9rem; }
