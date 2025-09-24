@@ -1,0 +1,42 @@
+name = "cf_ai_session_chat"
+main = "src/index.ts"
+compatibility_date = "2025-09-23"
+
+## Bindings
+
+# Bind Workers AI to a variable named `AI`.  When the Worker calls
+# `env.AI.run()`, it will execute the model specified in `MODEL`.
+[ai]
+binding = "AI"
+
+# Durable Object binding
+[[durable_objects.bindings]]
+name = "SESSIONS"
+class_name = "SessionDO"
+
+# Migration tag for the Durable Object.  When you deploy the Worker for the
+# first time, Wrangler will create the class.  Subsequent migrations will
+# update it as needed.
+[[migrations]]
+tag = "v1"
+new_classes = ["SessionDO"]
+
+# Workflows binding.  This allows you to invoke the summariser workflow via
+# `wrangler workflows execute workflows/summarize.ts`.  The workflow uses
+# environment variables and may call back into the Worker.
+[workflows]
+bindings = [
+  { name = "SUMMARIZER", script_name = "workflows/summarize.ts" }
+]
+
+## Variables
+
+# The AI model to use for responses.  You can change this to another
+# supported Workers AI model name if desired.
+[vars]
+MODEL = "@cf/meta/llama-3.3-8b-instruct"
+
+# Number of chat turns to include from the end of the history when
+# constructing a prompt.  Represented as a string so it can be read via
+# `env.TAIL_TURNS` in the Worker.
+TAIL_TURNS = "8"
